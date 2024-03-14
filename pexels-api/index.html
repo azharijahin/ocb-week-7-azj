@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="photo"></div>
+</body>
+<script>
+    fetch('https://api.pexels.com/v1/curated', {
+        headers: {
+            'Authorization': 'e3GYyh9KZxURjr3JcIehvmWp7XaPCFwnBrHV9IZRJQMUQHziaxNU5EX2'
+        }
+    })
+        .then(response => response.json())
+        .then(body => {
+            const imageList = body.photos.map((photo) => (
+                `<img src="${photo.src.medium}"/>`
+            ))
+
+            return imageList
+        })
+        .then(list => {
+            document.getElementById('photo').innerHTML = list
+        })
+        .catch(err => {debugger})
+</script>
+</html>
